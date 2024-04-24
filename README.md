@@ -13,9 +13,6 @@
 ## Test on vkitti 15-deg-left datasets.
 0) prepare.
 follow [prepare.md](prepare.md)
-```
-conda activate droidenv
-```
 
 1) generate inital panoptic segmentation.
 ```
@@ -47,11 +44,13 @@ You can get the results in the paper by iterating multiple times.
 1)  To train VPS_Module, you can refer to [Detectron2](https://detectron2.readthedocs.io/en/latest/tutorials/getting_started.html) for more training details.
 Here for example, you can train  vkitti 15-deg-left on 4 GPUs, and training results are saved on `output/vps_training/`. You can modify the config-file according to the hardware conditions.
 ```
-python3 -W ignore VPS_Module/tools/train_net.py \
+python -W ignore VPS_Module/tools/train_net.py \
 --config-file VPS_Module/configs/COCO-PanopticSegmentation/panoptic_fpn_R_50_3x_vkitti_511.yaml --num-gpu 4 \
 MODEL.WEIGHTS checkpoints/panFPN.pth \
 OUTPUT_DIR output/vps_training/
 ```
+
+And you can use tools/train_net.sh script instead that command
 
 2) To train VO_Module, you can refer to [DROID-SLAM](https://github.com/princeton-vl/DROID-SLAM) for more training details.
 Here for example, you can train vkitti on 4 GPUs.
