@@ -70,3 +70,14 @@ RUN python -m pip install 'git+https://github.com/facebookresearch/detectron2.gi
 RUN pip install ninja &&\
     cd /PVO/VO_Module && python setup.py install
 
+
+# # SSH acess set
+# RUN mkdir /var/run/sshd
+# # RUN echo 'root:pass' | chpasswd
+# RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+# RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
+
+# RUN service ssh start
+
+# EXPOSE 8888
+# EXPOSE 22

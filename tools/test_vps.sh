@@ -13,6 +13,7 @@ python VPS_Module/tools/3_preparing.py
 # calculate vpq per scene on clone 5:1:1
 for sce in 's1' 's2' 's6' 's18' 's20'
 do
+    echo 'Scene', $sce;
     python VPS_Module/tools/4_eval_vpq.py \
     --gt-json datasets/Virtual_KITTI2/ALL_clone/vkitti_511_val_$sce.json \
     --gt-dir datasets/Virtual_KITTI2/ALL_clone/pan_gt_511_val_$sce \

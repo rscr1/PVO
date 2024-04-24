@@ -218,15 +218,15 @@ def vpq_compute_single_core(gt_pred_set, categories, nframes=2):
 
 
 def vpq_compute(gt_pred_split, categories, nframes, output_dir):
-    start_time = time.time()
     vpq_stat = PQStat()
-    # for idx, gt_pred_set in enumerate(gt_pred_split):
+    # fixed sliding window algorithm
+    # for idx, gt_pred_set in enumerate(gt_pred_split): 
     vpq_stat = vpq_compute_single_core(gt_pred_split, categories, nframes=nframes)
         # vpq_stat += tmp
 
     # hyperparameter: window size k
     k = nframes
-    print('==> %d-frame vpq_stat:'%(k), time.time()-start_time, 'sec')
+    print('==> %d-frame vpq_stat:'%(k))
     metrics = [("All", None), ("Things", True), ("Stuff", False)]
     results = {}
     for name, isthing in metrics:
@@ -254,7 +254,7 @@ def vpq_compute(gt_pred_split, categories, nframes, output_dir):
     return vpq_all, vpq_thing, vpq_stuff
 
 def cal_vpq_compute(gt_json, pred_json, gt_folder, pred_folder, output_dir):
-    print("begin vpq computation.....")
+    print("begin vpq computation on.....")
     with open(pred_json, 'r') as f:
         pred_jsons = json.load(f)
     with open(gt_json, 'r') as f:
@@ -294,6 +294,7 @@ def cal_vpq_compute(gt_json, pred_json, gt_folder, pred_folder, output_dir):
 
     # for k in [0,5,10,15] --> num_frames_w_gt [1,2,3,4]
     for nframes in [1,5,10,15,20]:
+        print(f'Sliding window size: {nframes}')
         start_time = time.time()
         gt_pred_split_ = copy.deepcopy(gt_pred_all)
         vpq_all_, vpq_thing_, vpq_stuff_ = vpq_compute(
@@ -301,20 +302,21 @@ def cal_vpq_compute(gt_json, pred_json, gt_folder, pred_folder, output_dir):
         del gt_pred_split_
         end_time = time.time()
         print(vpq_all_, vpq_thing_, vpq_stuff_)
+        print(f'Single sliding window calculation time: {end_time - start_time} sec\n')
         vpq_all.append(vpq_all_)
         vpq_thing.append(vpq_thing_)
         vpq_stuff.append(vpq_stuff_)
-        output_file.write('==> %d-frame vpq_stat: '%(nframes))
+        output_file.write('==> %d-frame vpq_stat:  with time: %d sec'%(nframes, end_time - start_time))
         output_file.write('%.4f, %.4f, %.4f\n'%(vpq_all_, vpq_thing_, vpq_stuff_))
     
     output_file.write("vpq_all:%.4f\n"%(sum(vpq_all)/len(vpq_all)))
     output_file.write("vpq_thing:%.4f\n"%(sum(vpq_thing)/len(vpq_thing)))
-    output_file.write("vpq_stuff:%.4f\n"%(sum(vpq_stuff)/len(vpq_stuff)))
+    output_file.write("vpq_stuff:%.4f\n\n"%(sum(vpq_stuff)/len(vpq_stuff)))
     output_file.close()
     print("--vpq_all:",sum(vpq_all)/len(vpq_all))
     print("--vpq_thing:",sum(vpq_thing)/len(vpq_thing))
     print("--vpq_stuff:",sum(vpq_stuff)/len(vpq_stuff))
-    print('==> DONE')
+    print('==> DONE\n')
 
 
 

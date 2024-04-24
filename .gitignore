@@ -4,15 +4,16 @@ __pycache__/
 *$py.class
 
 # C extensions
-*.so
 
-checkpoints/
-datasets/
-shared_data/
+checkpoints/panFPN.pth
+checkpoints/vkitti2_dy_train_semiv4_080000.pth
+datasets/Virtual_KITTI2
 
+shared_data/*
+!file.txt
+!shared_data/README.md
 # Distribution / packaging
 .Python
-build/
 develop-eggs/
 dist/
 downloads/
@@ -25,7 +26,6 @@ sdist/
 var/
 wheels/
 share/python-wheels/
-*.egg-info/
 .installed.cfg
 *.egg
 MANIFEST
@@ -144,19 +144,12 @@ cython_debug/
 
 
 __pycache__
-build
 dist
-*.egg-info
 *.vscode/
 *.pth
-tests
-checkpoints
-datasets
 runs
 cache
 *.out
-*.o
-data
 figures/*.pdf
 test_codes/
 tensorboard.sh

@@ -109,7 +109,7 @@ if __name__ == '__main__':
         for _ in range(1):
             poses_est, disps_est, residuals, full_flows, masks = \
                 model(Gs, images, disp0, intrinsics/8,
-                    graph, num_steps=11, fixedp=2,
+                    graph, num_steps=11, fixedp=2,  #swap num_steps to 11 from 12 (not enough gpu memory)
                     ret_flow=True, downsample=True)
             Gs = poses_est[-1]
             disp0 = disps_est[-1][:, :, 3::8, 3::8]
