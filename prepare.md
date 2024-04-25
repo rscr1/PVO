@@ -3,9 +3,9 @@
 -  Download the panFPN model from google drive: [panFPN_checkpoint](https://drive.google.com/drive/folders/1q1-uVxpEmaV19Bm2Qrl2f6T5qnXE1eia) and save to checkpoints/panFPN.pth
 - Download the vo model from google drive:[vo_checkpoint](https://drive.google.com/drive/folders/1q1-uVxpEmaV19Bm2Qrl2f6T5qnXE1eia) and save to checkpoints/vkitti2_dy_train_semiv4_080000.pth 
 
-# 1. Use Dockerfile 
+# 1. Use Dockerfile (Edit file if you need)
 ```Bash
-docker build -t dar_pvo:v0 -f Dockerfile .
+docker build -t pvo:v0 -f Dockerfile .
 ```
 
 # 2. Use run_container.sh (Edit file if you need)
@@ -34,7 +34,9 @@ Virtual_KITTI2/
       intristic.txt
       pose.txt
     15-deg-right/
-    ...
+    15-deg-right/
+    30-deg-left/
+    30-deg-right/
     clone/
   Scene02/
   Scene06/
