@@ -29,7 +29,7 @@ Virtual_KITTI2/
         rgb/
       bbox.txt
       colors.txt
-      extrainsic.txt
+      extrinsic.txt
       info.txt
       intristic.txt
       pose.txt
